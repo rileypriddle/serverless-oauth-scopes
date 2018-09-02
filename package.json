@@ -16,7 +16,7 @@
     "api",
     "gateway"
   ],
-  "author": "1.fei.luo@gmail.com",
+  "author": "birdcatcher",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/birdcatcher/serverless-oauth-scopes/issues"
