@@ -1,31 +1,28 @@
 {
-  "name": "serverless-add-api-key",
+  "name": "serverless-oauth-scopes",
   "version": "1.0.0",
-  "description": "serverless plugin to create a api key and usage pattern (if they don't already exist) and associates then to the Rest Api",
+  "description": "serverless plugin to set oauth scopes on apigateway http methods",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rrahul963/serverless-add-api-key.git"
+    "url": "git+https://github.com/birdcatcher/serverless-oauth-scopes.git"
   },
   "keywords": [
+    "oauth",
+    "scopes",
     "api",
-    "key",
-    "api",
-    "gateway",
-    "usage",
-    "pattern"
+    "gateway"
   ],
-  "author": "rahul.tulsian87@gmail.com",
+  "author": "1.fei.luo@gmail.com",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/rrahul963/serverless-add-api-key/issues"
+    "url": "https://github.com/birdcatcher/serverless-oauth-scopes/issues"
   },
-  "homepage": "https://github.com/rrahul963/serverless-add-api-key#readme",
+  "homepage": "https://github.com/birdcatcher/serverless-oauth-scopes#readme",
   "dependencies": {
-    "aws-sdk": "^2.245.1",
-    "chalk": "^2.4.1"
+    "aws-sdk": "^2.245.1"
   }
 }
