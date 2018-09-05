@@ -1,6 +1,6 @@
 {
   "name": "serverless-oauth-scopes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "serverless plugin to set oauth scopes on apigateway http methods",
   "main": "index.js",
   "scripts": {
