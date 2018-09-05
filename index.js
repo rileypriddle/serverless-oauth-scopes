@@ -75,6 +75,8 @@ const setOAuthScopes = async function setOAuthScopes(serverless) {
       }
     }
   }
+
+  await apigateway.createDeployment({restApiId: restApiId, stageName: stage}).promise();
 };
 
 async function delay(time) {
