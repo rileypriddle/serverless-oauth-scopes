@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk')
+const AWS = require('aws-sdk');
 
 /**
  * Main function that set OAuth scopes
@@ -20,6 +20,7 @@ const setOAuthScopes = async function setOAuthScopes(serverless) {
   // get restApiId of service defined in serverless.yml
   var resp = await apigateway.getRestApis({limit: 500}).promise();
   var restApiId = resp.items[resp.items.findIndex(item=>(item.name==apiName))].id;
+  var foundDiff = false;
 
   for (key in serverless.service.functions) {
     if (serverless.service.functions[key].events) {
@@ -32,8 +33,8 @@ const setOAuthScopes = async function setOAuthScopes(serverless) {
           serverless.cli.consoleLog(`AWSOAuthScope: ${path} : ${method} : ${scopes}`);  
 
           // get resource id
-          resp = await apigateway.getResources({restApiId: restApiId, limit: 500}).promise()
-          var resourceId = resp.items[resp.items.findIndex(item=>(item.path==path))].id
+          resp = await apigateway.getResources({restApiId: restApiId, limit: 500}).promise();
+          var resourceId = resp.items[resp.items.findIndex(item=>(item.path==path))].id;
           await delay(100);
 
           // get method
@@ -41,7 +42,14 @@ const setOAuthScopes = async function setOAuthScopes(serverless) {
             restApiId: restApiId, 
             resourceId: resourceId, 
             httpMethod: method
-          }).promise()
+          }).promise();
+
+          // check if there are changes
+          if (join(scopes) === join(resp.authorizationScopes)) {
+            continue;
+          } else {
+            foundDiff = true;
+          }
 
           var patchOperations = [];
           // remove existing scopes
@@ -76,13 +84,20 @@ const setOAuthScopes = async function setOAuthScopes(serverless) {
     }
   }
 
-  await apigateway.createDeployment({restApiId: restApiId, stageName: stage}).promise();
+  // create new deployment if there were changes
+  if (foundDiff) {
+    await apigateway.createDeployment({restApiId: restApiId, stageName: stage}).promise();
+  }
 };
 
 async function delay(time) {
   return new Promise(function(resolve, reject) {
     setTimeout(resolve, time);
   })
+}
+
+function join(arr) {
+  return arr ? arr.join(' ') : '';
 }
 
 /**
