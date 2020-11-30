@@ -5,7 +5,7 @@ A [serverless](http://www.serverless.com) plugin to set OAuth Scopes on APIGatew
 
 ## Install
 
-`npm install --save-dev serverless-oauth-scopes`
+`npm install --save-dev git+https://github.com/rileypriddle/serverless-oauth-scopes.git`
 
 Add the plugin to your `serverless.yml` file:
 
